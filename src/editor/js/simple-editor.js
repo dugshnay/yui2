@@ -1075,7 +1075,28 @@ var Dom = YAHOO.util.Dom,
                 YAHOO.log('DocType skipped because we are in BackCompat Mode.', 'warn', 'SimpleEditor');
             }
 
+            /* IE 11 support modification
+             Modified per this post: http://stackoverflow.com/questions/20149312/rich-text-yui-editor-broken-on-ie11
+             For IE changed its User-Agent, YUI(2.9) need a surgery.
+
+             See also: editor.js and simpleeditor.js
+             */
+            this.browser = YAHOO.env.parseUA();
+            /* End IE 11 support modification */
+
             if (this.browser.ie || this.browser.webkit || this.browser.opera || (navigator.userAgent.indexOf('Firefox/1.5') != -1)) {
+
+                /* IE 11 support modification
+                 Modified per this post: http://stackoverflow.com/questions/20149312/rich-text-yui-editor-broken-on-ie11
+                 For IE changed its User-Agent, YUI(2.9) need a surgery.
+
+                 See also: editor.js and simpleeditor.js
+                 */
+                if (this.browser.ie == 11) {
+                    this.browser.ie = 0;
+                }
+                /* End IE 11 support modification */
+
                 //Firefox 1.5 doesn't like setting designMode on an document created with a data url
                 try {
                     //Adobe AIR Code

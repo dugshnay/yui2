@@ -313,6 +313,17 @@ YAHOO.env.parseUA = function(agent) {
             }
         }
 
+        /* IE 11 support modification
+         Modified per this post: http://stackoverflow.com/questions/20149312/rich-text-yui-editor-broken-on-ie11
+         For IE changed its User-Agent, YUI(2.9) need a surgery.
+
+         See also: editor.js and simpleeditor.js
+         */
+        if (o.ie == 0 && ua.indexOf('Trident') != -1) {
+            o.ie = 11;
+        }
+        /* End IE 11 support modification */
+
         if (!o.webkit) { // not webkit
 // @todo check Opera/8.01 (J2ME/MIDP; Opera Mini/2.0.4509/1316; fi; U; ssr)
             m = ua.match(/Opera[\s\/]([^\s]*)/);
